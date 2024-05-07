@@ -1,0 +1,28 @@
+defaults:
+  - _self_
+  - runtime: local
+  - data: default
+  - env: ??
+  - world_model: rssmo
+  - version: default
+
+seed: 42
+embodiment_dataset_name: ??
+log_name: "${embodiment_dataset_name}/${environment_setup}/${world_model.name}/action_free=${action_free}/${seed}/${now:%Y-%m-%d-%H-%M-%S}"
+horizon: 50
+batch_size: 50
+batch_per_epoch: 100
+checkpoint_period: null
+epoch: 2000
+max_num_trajectories: null
+use_reward: false
+use_probe: false
+
+pretrained_model_name: null
+
+use_fp16: false
+grad_clip: 100.0
+
+environment_setup: visual
+
+action_free: false

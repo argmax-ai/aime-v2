@@ -1,0 +1,46 @@
+defaults:
+  - _self_
+  - runtime: local
+  - data: default
+  - env: ???
+  - world_model: rssmo
+  - version: default
+  - override world_model/intrinsic_reward_config: disagreement
+
+algo_name: plan2explore
+seed: 42
+log_name: "${env.name}/${environment_setup}/${algo_name}/${world_model.name}/${seed}/${now:%Y-%m-%d-%H-%M-%S}"
+horizon: 50
+batch_size: 50
+batch_per_epoch: 100
+epoch: 2000
+prefill: 5
+pretraining_iterations: 100
+epsilon: 0.0
+gamma: 0.99
+lambda: 0.95
+imagine_horizon: 15
+policy_entropy_scale: 1e-4
+
+pretrained_model_name: null
+load_policy: false
+load_vnet: false
+freeze_pretrained_parameters: false
+
+use_fp16: false
+policy_lr: 8e-5
+vnet_lr : 8e-5
+grad_clip: 100.0
+
+environment_setup: visual
+
+policy:
+  hidden_size: 128
+  hidden_layers: 2
+
+vnet:
+  hidden_size: 128
+  hidden_layers: 2
+  target_config: 
+    period: 1
+    tau: 0.01

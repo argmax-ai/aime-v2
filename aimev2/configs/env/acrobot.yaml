@@ -1,0 +1,13 @@
+defaults:
+  - dmc
+
+embodiment: acrobot
+task: swingup
+supported_tasks: [swingup, swingup_sparse]
+sensors:
+  orientations:
+    modility: tabular
+    order: first
+  velocity:
+    modility: tabular
+    order: second

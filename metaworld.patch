@@ -1,0 +1,184 @@
+diff --git a/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_assembly_peg_v2.py b/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_assembly_peg_v2.py
+index f244535..f77e85f 100644
+--- a/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_assembly_peg_v2.py
++++ b/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_assembly_peg_v2.py
+@@ -86,6 +86,7 @@ class SawyerNutAssemblyEnvV2(SawyerXYZEnv):
+     def reset_model(self):
+         self._reset_hand()
+         self._target_pos = self.goal.copy()
++        self.obj_init_pos = self.init_config['obj_init_pos']
+ 
+         if self.random_init:
+             goal_pos = self._get_state_rand_vec()
+diff --git a/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_basketball_v2.py b/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_basketball_v2.py
+index c1087a7..8063557 100644
+--- a/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_basketball_v2.py
++++ b/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_basketball_v2.py
+@@ -90,9 +90,10 @@ class SawyerBasketballEnvV2(SawyerXYZEnv):
+         self.prev_obs = self._get_curr_obs_combined_no_goal()
+ 
+         basket_pos = self.goal.copy()
++        self.obj_init_pos = self.init_config['obj_init_pos']
+         self.sim.model.body_pos[self.model.body_name2id('basket_goal')] = basket_pos
+         self._target_pos = self.data.site_xpos[self.model.site_name2id('goal')]
+-
++        
+         if self.random_init:
+             goal_pos = self._get_state_rand_vec()
+             basket_pos = goal_pos[3:]
+@@ -103,7 +104,7 @@ class SawyerBasketballEnvV2(SawyerXYZEnv):
+             self.sim.model.body_pos[self.model.body_name2id('basket_goal')] = basket_pos
+             self._target_pos = self.data.site_xpos[self.model.site_name2id('goal')]
+ 
+-        self._set_obj_xyz(self.obj_init_pos)
++        self._set_obj_xyz(self.obj_init_pos) # this change the hand position for some reason
+         return self._get_obs()
+ 
+     def compute_reward(self, action, obs):
+diff --git a/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_button_press_topdown_v2.py b/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_button_press_topdown_v2.py
+index 8e499ea..1811fee 100644
+--- a/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_button_press_topdown_v2.py
++++ b/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_button_press_topdown_v2.py
+@@ -88,6 +88,7 @@ class SawyerButtonPressTopdownEnvV2(SawyerXYZEnv):
+     def reset_model(self):
+         self._reset_hand()
+         self._target_pos = self.goal.copy()
++        self.obj_init_pos = self.init_config['obj_init_pos']
+ 
+         if self.random_init:
+             goal_pos = self._get_state_rand_vec()
+diff --git a/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_button_press_topdown_wall_v2.py b/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_button_press_topdown_wall_v2.py
+index b4d644c..b691b0a 100644
+--- a/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_button_press_topdown_wall_v2.py
++++ b/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_button_press_topdown_wall_v2.py
+@@ -88,13 +88,13 @@ class SawyerButtonPressTopdownWallEnvV2(SawyerXYZEnv):
+     def reset_model(self):
+         self._reset_hand()
+         self._target_pos = self.goal.copy()
++        self.obj_init_pos = self.init_config['obj_init_pos']
+ 
+         if self.random_init:
+             goal_pos = self._get_state_rand_vec()
+             self.obj_init_pos = goal_pos
+ 
+-        self.sim.model.body_pos[
+-            self.model.body_name2id('box')] = self.obj_init_pos
++        self.sim.model.body_pos[self.model.body_name2id('box')] = self.obj_init_pos
+         self._target_pos = self._get_site_pos('hole')
+ 
+         self._obj_to_target_init = abs(
+diff --git a/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_button_press_v2.py b/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_button_press_v2.py
+index d7e17d5..3384b56 100644
+--- a/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_button_press_v2.py
++++ b/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_button_press_v2.py
+@@ -92,8 +92,7 @@ class SawyerButtonPressEnvV2(SawyerXYZEnv):
+             goal_pos = self._get_state_rand_vec()
+             self.obj_init_pos = goal_pos
+ 
+-        self.sim.model.body_pos[
+-            self.model.body_name2id('box')] = self.obj_init_pos
++        self.sim.model.body_pos[self.model.body_name2id('box')] = self.obj_init_pos
+         self._set_obj_xyz(0)
+         self._target_pos = self._get_site_pos('hole')
+ 
+diff --git a/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_button_press_wall_v2.py b/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_button_press_wall_v2.py
+index 2ba5af5..1fa3ec7 100644
+--- a/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_button_press_wall_v2.py
++++ b/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_button_press_wall_v2.py
+@@ -96,8 +96,7 @@ class SawyerButtonPressWallEnvV2(SawyerXYZEnv):
+             goal_pos = self._get_state_rand_vec()
+             self.obj_init_pos = goal_pos
+ 
+-        self.sim.model.body_pos[
+-            self.model.body_name2id('box')] = self.obj_init_pos
++        self.sim.model.body_pos[self.model.body_name2id('box')] = self.obj_init_pos
+         self._set_obj_xyz(0)
+         self._target_pos = self._get_site_pos('hole')
+ 
+diff --git a/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_door_close_v2.py b/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_door_close_v2.py
+index 2c93708..6e2e4f7 100644
+--- a/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_door_close_v2.py
++++ b/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_door_close_v2.py
+@@ -29,6 +29,7 @@ class SawyerDoorCloseEnvV2(SawyerDoorEnvV2):
+     def reset_model(self):
+         self._reset_hand()
+         self._target_pos = self.goal.copy()
++        self.obj_init_pos = self.init_config['obj_init_pos']
+         self.objHeight = self.data.get_geom_xpos('handle')[2]
+ 
+         if self.random_init:
+diff --git a/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_hand_insert_v2.py b/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_hand_insert_v2.py
+index 2cfe73e..b828be2 100644
+--- a/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_hand_insert_v2.py
++++ b/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_hand_insert_v2.py
+@@ -88,14 +88,15 @@ class SawyerHandInsertEnvV2(SawyerXYZEnv):
+         self.prev_obs = self._get_curr_obs_combined_no_goal()
+         self._target_pos = self.goal.copy()
+         self.obj_init_angle = self.init_config['obj_init_angle']
++        self.obj_init_pos = self.init_config['obj_init_pos']
+         self.objHeight = self.get_body_com('obj')[2]
+ 
+-        # if self.random_init:
+-        goal_pos = self._get_state_rand_vec()
+-        while np.linalg.norm(goal_pos[:2] - goal_pos[-3:-1]) < 0.15:
++        if self.random_init:
+             goal_pos = self._get_state_rand_vec()
+-        self.obj_init_pos = np.concatenate((goal_pos[:2], [self.obj_init_pos[-1]]))
+-        self._target_pos = goal_pos[-3:]
++            while np.linalg.norm(goal_pos[:2] - goal_pos[-3:-1]) < 0.15:
++                goal_pos = self._get_state_rand_vec()
++            self.obj_init_pos = np.concatenate((goal_pos[:2], [self.obj_init_pos[-1]]))
++            self._target_pos = goal_pos[-3:]
+ 
+         self._set_obj_xyz(self.obj_init_pos)
+         return self._get_obs()
+diff --git a/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_shelf_place_v2.py b/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_shelf_place_v2.py
+index 5ba707a..47ecd79 100644
+--- a/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_shelf_place_v2.py
++++ b/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_shelf_place_v2.py
+@@ -88,7 +88,7 @@ class SawyerShelfPlaceEnvV2(SawyerXYZEnv):
+         self._reset_hand()
+         self.sim.model.body_pos[self.model.body_name2id('shelf')] = self.goal.copy() - np.array([0, 0, 0.3])
+         self._target_pos = self.sim.model.site_pos[self.model.site_name2id('goal')] + self.sim.model.body_pos[self.model.body_name2id('shelf')]
+-        self.obj_init_pos = self.adjust_initObjPos(self.init_config['obj_init_pos'])
++        self.obj_init_pos = np.array(self.adjust_initObjPos(self.init_config['obj_init_pos']))
+         self.obj_init_angle = self.init_config['obj_init_angle']
+ 
+         if self.random_init:
+diff --git a/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_sweep_into_goal_v2.py b/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_sweep_into_goal_v2.py
+index b1458d9..0e0e8d5 100644
+--- a/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_sweep_into_goal_v2.py
++++ b/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_sweep_into_goal_v2.py
+@@ -82,7 +82,7 @@ class SawyerSweepIntoGoalEnvV2(SawyerXYZEnv):
+     def reset_model(self):
+         self._reset_hand()
+         self._target_pos = self.goal.copy()
+-        self.obj_init_pos = self.get_body_com('obj')
++        self.obj_init_pos = self.init_config['obj_init_pos']
+         self.obj_init_angle = self.init_config['obj_init_angle']
+         self.objHeight = self.get_body_com('obj')[2]
+ 
+diff --git a/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_window_close_v2.py b/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_window_close_v2.py
+index 2e6e658..dca308a 100644
+--- a/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_window_close_v2.py
++++ b/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_window_close_v2.py
+@@ -89,6 +89,7 @@ class SawyerWindowCloseEnvV2(SawyerXYZEnv):
+ 
+     def reset_model(self):
+         self._reset_hand()
++        self.obj_init_pos = self.init_config['obj_init_pos']
+         self.prev_obs = self._get_curr_obs_combined_no_goal()
+ 
+         if self.random_init:
+diff --git a/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_window_open_v2.py b/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_window_open_v2.py
+index e830961..8fcb836 100644
+--- a/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_window_open_v2.py
++++ b/metaworld/envs/mujoco/sawyer_xyz/v2/sawyer_window_open_v2.py
+@@ -85,6 +85,7 @@ class SawyerWindowOpenEnvV2(SawyerXYZEnv):
+ 
+     def reset_model(self):
+         self._reset_hand()
++        self.obj_init_pos = self.init_config['obj_init_pos']
+         self.prev_obs = self._get_curr_obs_combined_no_goal()
+ 
+         if self.random_init:

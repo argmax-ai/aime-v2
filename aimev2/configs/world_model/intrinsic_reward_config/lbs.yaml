@@ -1,0 +1,4 @@
+algo: lbs
+hidden_size: 1024
+hidden_layers: 2
+scale: 0.1

@@ -1,0 +1,16 @@
+defaults:
+  - dmc
+
+embodiment: finger
+task: spin
+supported_tasks: [spin, turn_easy, turn_hard]
+sensors:
+  position:
+    modility: tabular
+    order: first
+  touch:
+    modility: tabular 
+    order: first
+  velocity:
+    modility: tabular
+    order: second

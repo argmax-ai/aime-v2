@@ -1,0 +1,48 @@
+defaults:
+  - _self_
+  - runtime: local
+  - data: default
+  - env: ???
+  - version: default
+
+embodiment_dataset_name: ??
+demonstration_dataset_name: ??
+
+algo_name: bco-alpha
+seed: 42
+log_name: "${env.name}/${environment_setup}/${embodiment_dataset_name}/${demonstration_dataset_name}/${num_expert_trajectories}/${algo_name}/${seed}/${now:%Y-%m-%d-%H-%M-%S}"
+stack: 3
+batch_size: 256
+train_validation_split_ratio: 0.7
+num_expert_trajectories: null
+num_test_trajectories: 10
+patience: 3
+min_idm_epoch: 10
+min_idm_steps: 5000
+min_policy_epoch: 10
+min_policy_steps: 5000
+num_collecting_trajectories: 20
+epoch: 1000
+
+merger_type: flare
+init_with_idm_encoder: True
+
+idm_lr : 1e-3
+policy_lr: 1e-3
+grad_clip: 100.0
+
+environment_setup: visual
+
+encoders:
+  tabular:
+    name: identity
+  visual:
+    name: cnn_ha
+
+idm:
+  hidden_size: 128
+  hidden_layers: 2
+
+policy:
+  hidden_size: 128
+  hidden_layers: 2

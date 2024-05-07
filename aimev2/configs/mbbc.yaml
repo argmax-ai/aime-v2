@@ -1,0 +1,33 @@
+defaults:
+  - _self_
+  - runtime: local
+  - data: default
+  - env: ???
+  - world_model: rssmo
+  - version: default
+
+pretrained_model_name: ???
+demonstration_dataset_name: ??
+
+algo_name: mbbc
+seed: 42
+log_name: "${env.name}/${environment_setup}/${demonstration_dataset_name}/${algo_name}/${seed}/${now:%Y-%m-%d-%H-%M-%S}"
+batch_size: 50
+horizon: 50
+freeze_model: True
+train_validation_split_ratio: 0.7
+num_expert_trajectories: 100
+num_test_trajectories: 100
+patience: 3
+min_policy_epoch: 50
+eval_every_epoch: True
+
+use_log_prob: false
+policy_lr: 1e-3
+grad_clip: 100.0
+
+environment_setup: visual
+
+policy:
+  hidden_size: 128
+  hidden_layers: 2

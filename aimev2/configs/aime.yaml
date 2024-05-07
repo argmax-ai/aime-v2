@@ -1,0 +1,47 @@
+defaults:
+  - _self_
+  - runtime: local
+  - data: default
+  - env: ???
+  - world_model: rssmo
+  - version: default
+
+pretrained_model_name: ???
+demonstration_dataset_name: ???
+embodiment_dataset_name: null
+
+algo_name: aime
+freeze_model: True
+random_policy: True
+num_expert_trajectories: null
+seed: 42
+log_name: "${env.name}/${environment_setup}/${algo_name}/${demonstration_dataset_name}/${pretrained_model_name}/${num_expert_trajectories}/use_idm=${use_idm}/${world_model.idm_mode}/kl_only=${kl_only}/${seed}/${now:%Y-%m-%d-%H-%M-%S}"
+horizon: 50
+batch_size: 50
+batch_per_epoch: 100
+epoch: 500
+test_period: 50
+num_test_trajectories: 10
+final_num_test_trajectories: 100
+
+use_fp16: false
+policy_lr: 3e-4
+grad_clip: 100.0
+
+use_terminal: False
+use_reward: False
+use_probe: False
+
+environment_setup: visual
+
+use_idm: False
+idm_mode: posterior
+kl_only: False
+
+policy:
+  hidden_size: 128
+  hidden_layers: 2
+
+vnet:
+  hidden_size: 128
+  hidden_layers: 2

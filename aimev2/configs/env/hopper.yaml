@@ -1,0 +1,16 @@
+defaults:
+  - dmc
+
+embodiment: hopper
+task: stand
+supported_tasks: [stand, hop]
+sensors:
+  position:
+    modility: tabular
+    order: first
+  touch:
+    modility: tabular 
+    order: first
+  velocity:
+    modility: tabular
+    order: second

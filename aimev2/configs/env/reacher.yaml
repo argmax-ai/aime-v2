@@ -1,0 +1,17 @@
+defaults:
+  - dmc
+
+embodiment: reacher
+task: easy
+supported_tasks: [easy, hard]
+sensors:
+  position:
+    modility: tabular
+    order: first
+  to_target:
+    modility: tabular 
+    order: first
+    type: external
+  velocity:
+    modility: tabular
+    order: second

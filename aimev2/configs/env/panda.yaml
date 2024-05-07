@@ -1,0 +1,49 @@
+class: robosuite
+name: "${env.embodiment}-${env.task}"
+embodiment: Panda
+task: Lift
+supported_tasks: [Lift, PickPlaceCan, NutAssemblySquare]
+action_repeat: 1
+render: false
+size: [128, 128]
+sensors:
+  robot0_joint_pos_cos:
+    modility: tabular
+    order: first
+    type: internal
+  robot0_joint_pos_sin:
+    modility: tabular
+    order: first
+    type: internal
+  robot0_joint_vel:
+    modility: tabular
+    order: second
+    type: internal
+  robot0_eef_pos:
+    modility: tabular
+    order: first
+    type: internal
+  robot0_eef_quat:
+    modility: tabular
+    order: first
+    type: internal
+  robot0_gripper_qpos:
+    modility: tabular
+    order: first
+    type: internal
+  robot0_gripper_qvel:
+    modility: tabular
+    order: second
+    type: internal
+  # robot0_proprio-state:
+  #   modility: tabular
+  #   order: second
+  #   type: internal
+  object-state:
+    modility: tabular
+    order: first
+    type: external
+  agentview_image:
+    modility: visual
+    order: first
+    type: external

@@ -1,0 +1,50 @@
+defaults:
+  - intrinsic_reward_config: disable
+
+name: ??
+
+nll_reweight: dim_wise
+idm_mode: detach
+predict_emb: false
+momentum_parameter: 0.01
+
+min_std: null
+
+kl_scale: 1.0
+free_nats: 0.0
+kl_rebalance: null
+
+encoders:
+  tabular:
+    name: identity
+  visual:
+    name: cnn_ha
+    width: 32
+
+decoders:
+  tabular:
+    name: smlp
+    hidden_size: 128
+    hidden_layers: 2
+  binary:
+    name: binary
+    hidden_size: 128
+    hidden_layers: 2
+  visual:
+    name: cnn_ha
+    width: 32
+    sigmoid: false
+
+probes:
+  tabular:
+    name: dmlp
+    hidden_size: 128
+    hidden_layers: 2
+  visual: 
+    name: cnn_ha
+    width: 32
+    sigmoid: false
+
+optimizor:
+  name: Adam
+  lr: 3e-4

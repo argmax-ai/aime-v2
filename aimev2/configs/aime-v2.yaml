@@ -1,0 +1,68 @@
+defaults:
+  - _self_
+  - runtime: local
+  - data: default
+  - env: ???
+  - world_model: rssmo
+  - version: default
+
+embodiment_dataset_name: null
+num_embodiment_trajectories: null
+embodiment_dataset_sampling_mode: random
+embodiment_dataset_reg_mode: ratio
+embodiment_dataset_reg_sampling_ratio: 0.5
+demonstration_dataset_name: ???
+likelihood_model_name: null
+offline: false
+label_embodiment_dataset: false
+
+algo_name: aime-v2
+num_expert_trajectories: null
+seed: 42
+log_name: "${env.name}/${environment_setup}/${demonstration_dataset_name}/${algo_name}/${policy_entropy_scale}/${policy_reset_period}/${seed}/${now:%Y-%m-%d-%H-%M-%S}"
+horizon: 50
+batch_size: 50
+batch_per_epoch: 100
+prefill: 0
+model_pretraining_iterations: 0
+policy_pretraining_iterations: 2000
+epsilon: 0.0
+epoch: 1000
+policy_reset_period: null
+test_period: 50
+num_test_trajectories: 10
+gamma: 0.99
+lambda: 0.95
+imagine_horizon: 15
+policy_entropy_scale: 1e-4
+value_gradient_loss_scale: 0.1
+
+pretrained_model_name: null
+load_policy: false
+load_vnet: false
+freeze_pretrained_parameters: false
+
+use_fp16: false
+policy_lr: 3e-4
+vnet_lr : 8e-5
+grad_clip: 100.0
+
+environment_setup: visual
+
+use_idm: False
+kl_only: False
+
+use_terminal: True
+use_reward: False
+use_probe: False
+
+policy:
+  hidden_size: 128
+  hidden_layers: 2
+
+vnet:
+  hidden_size: 128
+  hidden_layers: 2
+  target_config: 
+    period: 1
+    tau: 0.01

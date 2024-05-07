@@ -1,0 +1,13 @@
+class: dmc
+name: "${env.embodiment}-${env.task}"
+embodiment: ??
+task: ??
+supported_tasks: [swingup, swingup_sparse]
+action_repeat: 2
+render: false
+size: [64, 64]
+sensors:
+  image:
+    modility: visual
+    order: first
+    type: external

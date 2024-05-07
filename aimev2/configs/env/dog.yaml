@@ -1,0 +1,34 @@
+defaults:
+  - dmc
+
+embodiment: dog
+task: run
+supported_tasks: [stand, walk, trot, run, fetch]
+sensors:
+  joint_angles:
+    modility: tabular
+    order: first
+  joint_velocites:
+    modility: tabular
+    order: second
+  torso_pelvis_height:
+    modility: tabular
+    order: first  
+  z_projection:
+    modility: tabular
+    order: first  
+  torso_com_velocity:
+    modility: tabular
+    order: second
+  inertial_sensors:
+    modility: tabular
+    order: first  
+  foot_forces:
+    modility: tabular
+    order: first  
+  touch_sensors:
+    modility: tabular
+    order: first  
+  actuator_state:
+    modility: tabular
+    order: first    

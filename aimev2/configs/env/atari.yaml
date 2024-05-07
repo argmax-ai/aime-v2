@@ -1,0 +1,15 @@
+class: atari
+name: "${env.task}"
+embodiment: atari
+task: 'Boxing'
+supported_tasks: [Boxing, Pong, Breakout, MsPacman]
+action_repeat: 1
+render: false
+size: [64, 64]
+sensors:
+  ram:
+    modility: tabular
+    order: second
+  image:
+    modility: visual
+    order: first

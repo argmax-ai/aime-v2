@@ -1,0 +1,4 @@
+dataset:
+  lazy: False
+dataloader:
+  num_workers: 4

@@ -1,0 +1,16 @@
+defaults:
+  - dmc
+
+embodiment: walker
+task: walk
+supported_tasks: [stand, walk, run, walkbackward, runbackward, flip, flipbackward, jump]
+sensors:
+  orientations:
+    modility: tabular
+    order: first
+  height:
+    modility: tabular 
+    order: first
+  velocity:
+    modility: tabular
+    order: second

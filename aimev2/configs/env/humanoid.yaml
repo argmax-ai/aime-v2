@@ -1,0 +1,25 @@
+defaults:
+  - dmc
+
+embodiment: humanoid
+task: walk
+supported_tasks: [stand, walk, run]
+sensors:
+  joint_angles:
+    modility: tabular
+    order: first
+  head_height:
+    modility: tabular 
+    order: first
+  extremities:
+    modility: tabular 
+    order: first    
+  torso_vertical:
+    modility: tabular 
+    order: first
+  com_velocity:
+    modility: tabular
+    order: second
+  velocity:
+    modility: tabular
+    order: second

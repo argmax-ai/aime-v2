@@ -1,0 +1,6 @@
+algo: disagreement
+num_ensembles: 5
+hidden_size: 1024
+hidden_layers: 2
+scale: 0.1
+use_probe: false

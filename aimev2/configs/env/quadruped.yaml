@@ -1,0 +1,22 @@
+defaults:
+  - dmc
+
+embodiment: quadruped
+task: walk
+supported_tasks: [walk, run, escape, fetch]
+sensors:
+  egocentric_state:
+    modility: tabular
+    order: first
+  torso_velocity:
+    modility: tabular 
+    order: second
+  torso_upright:
+    modility: tabular
+    order: first
+  imu:
+    modility: tabular
+    order: first
+  force_torque:
+    modility: tabular
+    order: first  

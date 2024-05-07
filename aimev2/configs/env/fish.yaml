@@ -1,0 +1,20 @@
+defaults:
+  - dmc
+
+embodiment: fish
+task: swim
+supported_tasks: [swim, upright]
+sensors:
+  joint_angles:
+    modility: tabular
+    order: first
+  upright:
+    modility: tabular 
+    order: first
+  target:
+    modility: tabular 
+    order: first
+    type: external
+  velocity:
+    modility: tabular
+    order: second

@@ -1,0 +1,13 @@
+defaults:
+  - dmc
+
+embodiment: cheetah
+task: run
+supported_tasks: [run, runbackward, flip, flipbackward]
+sensors:
+  position:
+    modility: tabular
+    order: first
+  velocity:
+    modility: tabular
+    order: second

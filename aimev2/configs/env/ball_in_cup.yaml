@@ -1,0 +1,13 @@
+defaults:
+  - dmc
+
+embodiment: ball_in_cup
+task: catch
+supported_tasks: [catch]
+sensors:
+  position:
+    modility: tabular
+    order: first
+  velocity:
+    modility: tabular
+    order: second

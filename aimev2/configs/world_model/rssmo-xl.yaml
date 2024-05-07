@@ -1,0 +1,54 @@
+defaults:
+  - rssmo
+
+state_dim: [4096, 30]
+hidden_size: 1024
+hidden_layers: 5
+
+encoders:
+  tabular:
+    name: mlp
+    hidden_size: 1024
+    hidden_layers: 5
+    hidden_activation: swish
+    norm: ln
+    have_head: false
+  visual:
+    name: dreamer_resnet
+    width: 96
+
+decoders:
+  tabular:
+    name: dmlp
+    hidden_size: 1024
+    hidden_layers: 5
+    hidden_activation: swish
+    norm: ln
+  binary:
+    name: binary
+    hidden_size: 1024
+    hidden_layers: 5
+    hidden_activation: swish
+    norm: ln
+  visual:
+    name: dreamer_resnet
+    sigmoid: false
+    width: 96
+
+probes:
+  tabular:
+    name: dmlp
+    hidden_size: 1024
+    hidden_layers: 5
+    hidden_activation: swish
+    norm: ln
+  binary:
+    name: binary
+    hidden_size: 1024
+    hidden_layers: 5
+    hidden_activation: swish
+    norm: ln
+  visual: 
+    name: dreamer_resnet
+    sigmoid: false
+    width: 96

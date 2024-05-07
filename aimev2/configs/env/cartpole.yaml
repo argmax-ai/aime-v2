@@ -1,0 +1,13 @@
+defaults:
+  - dmc
+
+embodiment: cartpole
+task: swingup
+supported_tasks: [swingup, balance, swingup_sparse, balance_sparse]
+sensors:
+  position:
+    modility: tabular
+    order: first
+  velocity:
+    modility: tabular
+    order: second

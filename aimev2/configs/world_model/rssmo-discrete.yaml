@@ -1,0 +1,5 @@
+defaults:
+  - rssmo
+
+state_dim: [512, 32, 32]
+state_distribution: discrete

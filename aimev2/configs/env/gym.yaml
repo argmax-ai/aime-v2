@@ -1,0 +1,15 @@
+class: gym
+name: "${env.task}"
+embodiment: None
+task: 'Pendulum-v1'
+supported_tasks: [swingup, swingup_sparse]
+action_repeat: 1
+render: false
+size: [64, 64]
+sensors:
+  state:
+    modility: tabular
+    order: second
+  image:
+    modility: visual
+    order: first

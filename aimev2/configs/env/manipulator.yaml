@@ -1,0 +1,35 @@
+defaults:
+  - dmc
+
+embodiment: manipulator
+task: bring_ball
+supported_tasks: [bring_ball, bring_peg, insert_ball, insert_peg, bring_ball_dense, bring_peg_dense, insert_ball_dense, insert_peg_dense]
+sensors:
+  arm_pos:
+    modility: tabular
+    order: first
+    type: internal
+  touch:
+    modility: tabular 
+    order: first
+    type: internal
+  hand_pos:
+    modility: tabular
+    order: first
+    type: internal
+  object_pos:
+    modility: tabular 
+    order: first
+    type: external
+  target_pos:
+    modility: tabular 
+    order: first
+    type: external
+  arm_vel:
+    modility: tabular
+    order: second
+    type: internal
+  object_vel:
+    modility: tabular
+    order: second
+    type: internal
