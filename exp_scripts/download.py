@@ -45,7 +45,7 @@ if __name__ == "__main__":
         else [f"{args.name}-part{i}.zip" for i in range(parts[args.name])]
     )
     for file in files:
-        os.system(f"wget -P {output_folder} {remote_url+file}")
+        os.system(f"wget -P {output_folder} {remote_url+file} --no-check-certificate")
 
     print("Extracting files ...")
     extract_folder = (

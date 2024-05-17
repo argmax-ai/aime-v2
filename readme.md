@@ -87,13 +87,13 @@ You can easily run `python exp_scripts/download.py --name walker-plan2explore-bu
 If you want to generate the embodiment dataset yourself, you need to run the plan2explore agent by
 
 ```sh
-python train_scripts/train_plan2explore.py env=walker log_name=walker-run-plan2explore`
+python train_scripts/train_plan2explore.py env=walker log_name=walker-run-plan2explore
 ```
 
 Then you can export the dataset to `datasets/` by
 
 ```sh
-mv logs/walker-run-plan2explore/train_trajectories datasets/walker-plan2explore-buffer`
+mv logs/walker-run-plan2explore/train_trajectories datasets/walker-plan2explore-buffer
 ```
 
 #### Getting the Demonstration dataset
@@ -114,25 +114,25 @@ You need to pretrain both the world model and the VIPER model. You can easily ru
 Or you can choose to train the models yourself, which can be done saperately by 
 
 ```sh
-python train_scripts/train_model_only.py env=walker embodiment_dataset_name=walker-plan2explore-buffer log_name=walker-model-training`
+python train_scripts/train_model_only.py env=walker embodiment_dataset_name=walker-plan2explore-buffer log_name=walker-model-training
 ```
 
 and 
 
 ```sh
-python train_scripts/train_model_only.py env=walker embodiment_dataset_name=patchail-walker-run-expert action_free=True epoch=5 log_name=walker-run-viper-training`.
+python train_scripts/train_model_only.py env=walker embodiment_dataset_name=patchail-walker-run-expert action_free=True epoch=5 log_name=walker-run-viper-training
 ```
 
 Then you can further export the trained models by 
 
 ```sh
-python exp_scripts/export_model_from_log.py --log_folder logs/walker-model-training --model_name walker-plan2explore-buffer`
+python exp_scripts/export_model_from_log.py --log_folder logs/walker-model-training --model_name walker-plan2explore-buffer
 ```
 
 and 
 
 ```sh
-python exp_scripts/export_model_from_log.py --log_folder logs/walker-run-viper-training --model_name walker-run-viper`
+python exp_scripts/export_model_from_log.py --log_folder logs/walker-run-viper-training --model_name walker-run-viper
 ```
 
 #### Running AIME-v2
@@ -140,7 +140,7 @@ python exp_scripts/export_model_from_log.py --log_folder logs/walker-run-viper-t
 Finally, you can run AIME-v2 by
 
 ```sh
-python train_scripts/train_aime-v2.py env=walker env.task=run embodiment_dataset_name=walker-plan2explore-buffer demonstration_dataset_name=patchail-walker-run-expert pretrained_model_name=walker-plan2explore-buffer likelihood_model_name=walker-run-viper`
+python train_scripts/train_aime-v2.py env=walker env.task=run embodiment_dataset_name=walker-plan2explore-buffer demonstration_dataset_name=patchail-walker-run-expert pretrained_model_name=walker-plan2explore-buffer likelihood_model_name=walker-run-viper
 ```
 
 ### MetaWorld
@@ -160,7 +160,7 @@ To do it yourself, first, you need to download their code and models and run the
 Then you can convert their datasets by
 
 ```sh
-python exp_scripts/dataset/convert_tdmpc2_metaworld_expert_dataset.py --root <tdmpc2-logs>`
+python exp_scripts/dataset/convert_tdmpc2_metaworld_expert_dataset.py --root <tdmpc2-logs>
 ```
 
 #### Pretraining
@@ -176,19 +176,19 @@ python train_scripts/train_model_only.py env=metaworld embodiment_dataset_name=t
 and 
 
 ```sh
-python train_scripts/train_model_only.py env=walker embodiment_dataset_name=tdmpc2-metaworld-<task>-expert action_free=True epoch=10 log_name=metaworld-<task>-viper-training`
+python train_scripts/train_model_only.py env=walker embodiment_dataset_name=tdmpc2-metaworld-<task>-expert action_free=True epoch=10 log_name=metaworld-<task>-viper-training
 ```
 
 Then you can further export the trained models by 
 
 ```sh
-python exp_scripts/export_model_from_log.py --log_folder logs/metaworld-mt50-training --model_name tdmpc2-metaworld-mt50`
+python exp_scripts/export_model_from_log.py --log_folder logs/metaworld-mt50-training --model_name tdmpc2-metaworld-mt50
 ```
 
 and 
 
 ```sh
-python exp_scripts/export_model_from_log.py --log_folder logs/metaworld-<task>-viper-training --model_name tdmpc2-metaworld-<task>-viper`
+python exp_scripts/export_model_from_log.py --log_folder logs/metaworld-<task>-viper-training --model_name tdmpc2-metaworld-<task>-viper
 ```
 
 #### Running AIME-v2
@@ -196,5 +196,5 @@ python exp_scripts/export_model_from_log.py --log_folder logs/metaworld-<task>-v
 Finally, you can run AIME-v2 by
 
 ```sh
-python train_scripts/train_aime-v2.py env=metaworld env.task=<task> embodiment_dataset_name=tdmpc2-metaworld-mt50 demonstration_dataset_name=tdmpc2-metaworld-<task>-expert pretrained_model_name=tdmpc2-metaworld-mt50  likelihood_model_name=tdmpc2-metaworld-<task>-viper world_model=rssmo-m batch_size=16 horizon=64 batch_per_epoch=20`
+python train_scripts/train_aime-v2.py env=metaworld env.task=<task> embodiment_dataset_name=tdmpc2-metaworld-mt50 demonstration_dataset_name=tdmpc2-metaworld-<task>-expert pretrained_model_name=tdmpc2-metaworld-mt50  likelihood_model_name=tdmpc2-metaworld-<task>-viper world_model=rssmo-m batch_size=16 horizon=64 batch_per_epoch=20
 ```
